@@ -1,0 +1,77 @@
+# ----------------------------------------------------------------------------
+# ------------- Start ChatGPT4 unaltered code suggestion ---------------------
+# --- See duplicate-finder-1.yml for original prompt and ChatGPT4 exchange ---
+
+import os
+import hashlib
+
+def hash_file(filepath):
+    """ This function returns the SHA-1 hash of the file passed into it"""
+    # make a hash object
+    h = hashlib.sha1()
+
+    # open file for reading in binary mode
+    with open(filepath, 'rb') as file:
+        chunk = 0
+        while chunk != b'':
+            # read only 1024 bytes at a time
+            chunk = file.read(1024)
+            h.update(chunk)
+
+    # return the hex representation of digest
+    return h.hexdigest()
+
+def find_duplicate_files(directory_path):
+    """ This function returns a list of duplicate files from the given directory"""
+    # dictionary to store file hash and file name
+    hashes = {}
+    duplicates = []
+
+    # iterate over all files in directory
+    for dirpath, dirnames, filenames in os.walk(directory_path):
+        for filename in filenames:
+            # get the path to the file
+            file_path = os.path.join(dirpath, filename)
+            # get the hash of the file
+            file_hash = hash_file(file_path)
+
+            # if the hash is already in the dictionary, it's a duplicate
+            if file_hash in hashes:
+                duplicates.append((file_path, hashes[file_hash]))
+            else:
+                hashes[file_hash] = file_path
+
+    return duplicates
+
+# Example usage, assuming you have a directory path
+# directory_path = 'path_to_your_directory'
+# print(find_duplicate_files(directory_path))
+
+# ------------------- End ChatGPT4 unaltered code suggestion -----------------
+# ----------------------------------------------------------------------------
+
+# TB Additions for conveneience and debug
+
+def find_files(directory_path):
+    """ This function returns a list of files found in the given directory"""
+
+    # iterate over all files in directory
+    for dirpath, dirnames, filenames in os.walk(directory_path):
+        for filename in filenames:
+            # get the path to the file
+            file_path = os.path.join(dirpath, filename)
+            # print the file path
+            print(file_path)
+
+def main():
+    path = "C:/Users/Tom-NUC/Pictures/2023"
+    print("Directory to be scanned: ", path)
+    duplicates = find_duplicate_files(path)
+    print("duplicate file count: ", len(duplicates))
+    for duplicate in duplicates:
+        print(duplicate)
+
+main()
+
+
+# suggested code executed successfully and without modification
