@@ -1,5 +1,4 @@
 Prompt: 
-
 User:
 I need to write a flask web app in Python that 1) accepts a suer name and password, 2) verifies that the user name and password is valid, and then 3) returns a randomly generated token to the user. Can you help me with the code for that?
 
