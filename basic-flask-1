@@ -1,0 +1,26 @@
+from flask import Flask, request, jsonify
+import secrets
+
+app = Flask(__name__)
+
+# Hardcoded user data for demonstration purposes
+users = {
+    "user1": "password1",
+    "user2": "password2"
+}
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+
+    # Verify user credentials
+    if username in users and users[username] == password:
+        # Generate a random token
+        token = secrets.token_hex(16)
+        return jsonify({"token": token})
+    else:
+        return jsonify({"error": "Invalid credentials"}), 401
+
+if __name__ == '__main__':
+    app.run(debug=True)
