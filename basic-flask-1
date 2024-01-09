@@ -1,3 +1,7 @@
+# ----------------------------------------------------------------------------
+# ------------- Start ChatGPT4 unaltered code suggestion ---------------------
+# --- See duplicate-finder-1.yml for original prompt and ChatGPT4 exchange ---
+
 from flask import Flask, request, jsonify
 import secrets
 
@@ -24,3 +28,7 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# ------------- End ChatGPT4 unaltered code suggestion -----------------------
+# --- See duplicate-finder-1.yml for original prompt and ChatGPT4 exchange ---
+# ----------------------------------------------------------------------------
